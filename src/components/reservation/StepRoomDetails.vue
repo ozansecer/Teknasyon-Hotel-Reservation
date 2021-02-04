@@ -10,12 +10,13 @@
       <v-col class="ma-auto roomType mb-11 mt-5" cols="12" sm="12" lg="6">
         <v-col class="mb-0 pb-0 bb" cols="12">
           <v-row>
-            <v-col class="align-center" cols="12" sm="12" md="3">
+            <v-col class="align-center" cols="12">
             <h3 class="primary--text">Oda Tipi:</h3>
             </v-col>
 
-            <v-col cols="12" sm="12" md="7">
+            <v-col cols="12">
               <v-radio-group
+                class="mt-0"
                 :row="true"
                 v-model="roomType"
                 :class="{
@@ -32,12 +33,13 @@
         </v-col>
         <v-col class="mt-0 pt-0" cols="12">
           <v-row>
-            <v-col class="align-center" cols="12" sm="12" md="3">
+            <v-col class="align-center mt-5" cols="12">
             <h3 class="primary--text">Manzara Seçimi:</h3>
             </v-col>
 
-            <v-col cols="12" sm="12" md="7">
+            <v-col cols="12">
               <v-radio-group
+                class="mt-0"
                 :row="true"
                 v-model="roomView"
                 :class="{
@@ -154,7 +156,7 @@ export default {
 
 .roomType {
     box-shadow: 5px 10px 18px rgba(136, 136, 136, 1);
-    border-radius: 10px!important;
+    border-radius: 10px ;
 }
 
 .bb {

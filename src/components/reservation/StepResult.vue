@@ -9,7 +9,7 @@
       Sayın {{getCardDetails && getCardDetails.name | toUpperCase}}, rezervasyonunuz başarıyla oluşturulmuştur. {{getCheckinDate}} tarihinde otelimize giriş yapabilirsiniz. Detaylar aşağıda yer almaktadır.
     </v-alert>
     <v-card
-      class="mx-auto"
+      class="mx-auto roomType pa-6"
       max-width="100%"
       tile
     >
@@ -37,16 +37,16 @@
             <br>
             <strong>Kart Numarası: {{ getCardDetails.number }}</strong>
           </v-list-item-subtitle>
-          <app-button 
-            class="float-left"
+        </v-list-item-content>
+      </v-list-item>
+    </v-card>
+    <app-button 
+            class="float-right mt-8"
               @click.native="prevStep"
               :index="stepIndex-1"
           >
             Başa Dön
-          </app-button>
-        </v-list-item-content>
-      </v-list-item>
-    </v-card>
+      </app-button>
   </section>
 </template>
 <script>
@@ -110,3 +110,11 @@ export default {
   },
 }
 </script>
+
+<style lang="less">
+  .v-list-item__content {
+    border-bottom: 1px dashed #cecece;
+    margin-bottom: 15px;
+  }
+
+</style>

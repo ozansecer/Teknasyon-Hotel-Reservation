@@ -3,11 +3,11 @@
     <v-row>
       <v-col class="mx-auto roomType mt-6 mb-11 pa-8" cols="12" sm="12" md="6" >
         <v-row>
-          <v-col class="align-center" cols="12" sm="12" md="5">
+          <v-col class="align-center" cols="12" sm="12" md="12">
             <h3 class="primary--text">Giriş Tarihi</h3>:
           </v-col>
           <v-col
-            cols="12" sm="12" md="7"
+            cols="12" sm="12" md="12"
             :class="{
               'has-error': buttonStatus && this.$v.checkinDate.$invalid,
               'has-success': !this.$v.checkinDate.$invalid,
@@ -43,11 +43,11 @@
           
         </v-row>
         <v-row>
-          <v-col class="align-center" cols="12" sm="12" md="5">
+          <v-col class="align-center" cols="12">
             <h3 class="primary--text">Çıkış Tarihi</h3>:
           </v-col>
           <v-col 
-            cols="12" sm="12" md="7"
+            cols="12"
             :class="{
               'has-error': buttonStatus && this.$v.checkoutDate.$invalid,
               'has-success': !this.$v.checkoutDate.$invalid,
@@ -176,13 +176,9 @@ export default {
     font-weight: bold;
   }
      
-.v-application--wrap {
-  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
-}
 
-.v-stepper__wrapper {
-  padding: 28px;
-}
+
+
 
 
 .v-stepper__content {
@@ -190,6 +186,14 @@ export default {
 }
 
   .v-application{
+
+    .v-application--wrap {
+        background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+
+        .v-stepper__wrapper {
+          padding: 28px;
+        }
+      }
     
     .has-error{
       .v-label{
