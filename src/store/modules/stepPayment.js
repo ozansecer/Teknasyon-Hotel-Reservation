@@ -6,22 +6,21 @@ const state = {
     cvc: null
   }
 }
-const getters = {
-  getCardDetails (state) {
-    return state.cardDetail
-  }
-}
+
 const mutations = {
   setCard (state, payload) {
     return state.cardDetail = payload
   }
 }
-const actions = {
+
+const getters = {
+  getCardDetails (state) {
+    return state.cardDetail
+  }
 }
 
 export default {
   state,
-  getters,
   mutations,
-  actions
+  getters
 }

@@ -4,40 +4,44 @@
     @change="changeStep"
     v-model="stepIndex"
     >
-      <v-stepper-header>
-        <v-stepper-step
-        :editable="completedStep > 0"
-        :complete="activeStep > 1"
-        step="1"
-        
-        >
-        Tarih Seçimi
-        </v-stepper-step>
-        <v-divider></v-divider>
-        <v-stepper-step
-        :editable="completedStep > 1"
-        :complete="activeStep > 2"
-        step="2"
-        >
-        Oda Seçimi
-        </v-stepper-step>
-        <v-divider></v-divider>
-        <v-stepper-step
-        :editable="completedStep > 2"
-        :complete="activeStep > 3"
-        step="3"
-        >
-        Ödeme
-        </v-stepper-step>
-        <v-divider></v-divider>
-        <v-stepper-step
-        :editable="completedStep > 4"
-        :complete="activeStep > 4"
-        step="4"
-        >
-        Sonuç
-        </v-stepper-step>
-      </v-stepper-header>
+    <v-row>
+       <v-col sm="12" md="8" class="mx-auto pa-7"> 
+        <v-stepper-header class="roomType">
+          <v-stepper-step
+          :editable="completedStep > 0"
+          :complete="activeStep > 1"
+          step="1"
+          
+          >
+          Tarih Seçimi
+          </v-stepper-step>
+          <v-divider></v-divider>
+          <v-stepper-step
+          :editable="completedStep > 1"
+          :complete="activeStep > 2"
+          step="2"
+          >
+          Oda Seçimi
+          </v-stepper-step>
+          <v-divider></v-divider>
+          <v-stepper-step
+          :editable="completedStep > 2"
+          :complete="activeStep > 3"
+          step="3"
+          >
+          Ödeme
+          </v-stepper-step>
+          <v-divider></v-divider>
+          <v-stepper-step
+          :editable="completedStep > 4"
+          :complete="activeStep > 4"
+          step="4"
+          >
+          Sonuç
+          </v-stepper-step>
+        </v-stepper-header>
+      </v-col>
+    </v-row>
       <v-stepper-items>
         <v-stepper-content step="1">
           <app-checkout></app-checkout>

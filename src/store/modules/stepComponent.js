@@ -3,15 +3,6 @@ const state = {
   completedStep: 0
 }
 
-const getters = {
-  getActiveStep (state) {
-    return state.activeStep
-  },
-  getCompletedStep (state) {
-    return state.completedStep
-  }
-}
-
 const mutations = {
   setActiveStep (state, payload) {
     state.activeStep = payload
@@ -21,8 +12,17 @@ const mutations = {
   }
 }
 
+const getters = {
+  getActiveStep (state) {
+    return state.activeStep
+  },
+  getCompletedStep (state) {
+    return state.completedStep
+  }
+}
+
 export default {
   state,
-  getters,
-  mutations
+  mutations,
+  getters
 }

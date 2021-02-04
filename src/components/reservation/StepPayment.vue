@@ -17,7 +17,7 @@
             {{!cardNumber ? placeNumber : cardNumber }}
           </span>
           <span class="card__name">
-            {{!cardName ? placeName : cardName | toUpperCase}}
+            {{!cardName && !cardName ? placeName : cardName | toUpperCase}}
           </span>
           <span class="card__date">
             {{!cardDate ? placeDate : cardDate }}
@@ -40,8 +40,8 @@
               @focus="focusInput('cardName')"
               @blur="blurInput('cardName')"
               :class="{
-                'has-error': (buttonStatus && !this.$v.cardName.required) || (buttonStatus &&  !this.$v.cardName.minLength),
-                'has-success': !this.$v.cardName.$invalid,
+                'errorContainer': (buttonStatus && !this.$v.cardName.required) || (buttonStatus &&  !this.$v.cardName.minLength),
+                'successContainer': !this.$v.cardName.$invalid,
                 }"
             ></v-text-field>
             <label v-if="buttonStatus && !this.$v.cardName.required" for="" class="error-message">Lütfen isim ve soyisim giriniz</label>
@@ -56,8 +56,8 @@
               @focus="focusInput('cardNumber')"
               @blur="blurInput('cardNumber')"
               :class="{
-                'has-error': (buttonStatus && !this.$v.cardNumber.required) || (buttonStatus &&  !this.$v.cardNumber.minLength),
-                'has-success': !this.$v.cardNumber.$invalid,
+                'errorContainer': (buttonStatus && !this.$v.cardNumber.required) || (buttonStatus &&  !this.$v.cardNumber.minLength),
+                'successContainer': !this.$v.cardNumber.$invalid,
                 }"
             >
             </v-text-field>
@@ -73,8 +73,8 @@
               @focus="focusInput('cardDate')"
               @blur="blurInput('cardDate')"
               :class="{
-                'has-error': (buttonStatus && !this.$v.cardDate.required) || (buttonStatus &&  !this.$v.cardDate.minLength),
-                'has-success': !this.$v.cardDate.$invalid,
+                'errorContainer': (buttonStatus && !this.$v.cardDate.required) || (buttonStatus &&  !this.$v.cardDate.minLength),
+                'successContainer': !this.$v.cardDate.$invalid,
                 }"
             ></v-text-field>
             <label v-if="buttonStatus && !this.$v.cardDate.required" for="" class="error-message">Lütfen kartınızın son kullanma tarihini giriniz</label>
@@ -89,8 +89,8 @@
               @focus="focusInput('cardCVC')"
               @blur="blurInput('cardCVC')"
               :class="{
-                'has-error': (buttonStatus && !this.$v.cardCVC.required) || (buttonStatus &&  !this.$v.cardCVC.minLength),
-                'has-success': !this.$v.cardCVC.$invalid,
+                'errorContainer': (buttonStatus && !this.$v.cardCVC.required) || (buttonStatus &&  !this.$v.cardCVC.minLength),
+                'successContainer': !this.$v.cardCVC.$invalid,
                 }"
             ></v-text-field>
             <label v-if="buttonStatus && !this.$v.cardCVC.required" for="" class="error-message">Lütfen kartınızın güvenlik numarasını giriniz</label>
@@ -239,7 +239,7 @@ export default {
       z-index: 2;
       width: 100%;
       text-align: left;
-      background:#000;
+      background:#6D6D6A;
       color:#fff;
       padding:10px;
       margin:0 0 20px 0;
@@ -279,7 +279,7 @@ export default {
     color:#babfce;
     text-shadow: 1px 1px 1px #fff;
     margin:40px 0 0 0;
-    background-color:#f5f5f5;
+    background-color:#ececec;
     border: solid 1px #06b4e4;
     border-left: 0;
     border-right: 0;
@@ -287,20 +287,17 @@ export default {
         font-size: 20px;
     }
   }
-
   .card__name,
   .card__date{
     z-index: 2;
     padding:0 20px 20px 20px;
-    color:#686b73;
-    text-shadow: 1px 1px 1px #fff;
+    color:#fff;
+    font-weight: bold;
     font-size: 20px;
     @media screen and (max-width:450px){
         font-size: 12px;
     }
   }
-
-
   .card__bg,
   .card__logo{
     position: absolute;
@@ -308,16 +305,15 @@ export default {
     height: 100%;
     border-radius: 10px;
     background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF); 
-    background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
-    border: 1px solid #cecece;
+    background: linear-gradient(to top, #4481eb 0%, #04befe 100%);
     box-shadow: 5px 5px 5px #888884;
   }
   .card__logo{
-    background-image:url('../../assets/teknasyon-logo.png');
+    background-image:url('../../assets/master-card.png');
     background-repeat: no-repeat;
-    background-position: top 20px left 20px;
+    background-position: top 15px left 20px;
     z-index: 2;
-    background-size:40%;
+    background-size: 20%;
   }
 
 </style>

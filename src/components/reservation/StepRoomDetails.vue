@@ -11,7 +11,7 @@
         <v-col class="mb-0 pb-0 bb" cols="12">
           <v-row>
             <v-col class="align-center" cols="12">
-            <h3 class="primary--text">Oda Tipi:</h3>
+              <h3 class="primary--text">Oda Tipi:</h3>
             </v-col>
 
             <v-col cols="12">
@@ -20,7 +20,7 @@
                 :row="true"
                 v-model="roomType"
                 :class="{
-                  'has-error': buttonStatus && !this.$v.roomType.required
+                  'errorContainer': buttonStatus && !this.$v.roomType.required
                   }"
               >
                 <v-radio value="Standart" label="Standart"></v-radio>
@@ -43,7 +43,7 @@
                 :row="true"
                 v-model="roomView"
                 :class="{
-                  'ma-0 has-error': buttonStatus && !this.$v.roomView.required
+                  'ma-0 errorContainer': buttonStatus && !this.$v.roomView.required
                   }"
               >
                 <v-radio value="Deniz" label="Deniz"></v-radio>
@@ -134,7 +134,7 @@ export default {
 }
 </script>
 <style lang="less">
-.has-error{
+.errorContainer{
   .theme--light.v-icon{
     color:Red;
   }
@@ -155,7 +155,7 @@ export default {
 }
 
 .roomType {
-    box-shadow: 5px 10px 18px rgba(136, 136, 136, 1);
+    box-shadow: 5px 10px 18px rgba(136, 136, 136, 1)!important;
     border-radius: 10px ;
 }
 

@@ -9,8 +9,8 @@
           <v-col
             cols="12" sm="12" md="12"
             :class="{
-              'has-error': buttonStatus && this.$v.checkinDate.$invalid,
-              'has-success': !this.$v.checkinDate.$invalid,
+              'errorContainer': buttonStatus && this.$v.checkinDate.$invalid,
+              'successContainer': !this.$v.checkinDate.$invalid,
             }"
           >
             <v-menu
@@ -33,12 +33,12 @@
               prev-icon="mdi-skip-previous"
               next-icon="mdi-skip-next"
               v-model="checkinDate"
-              :min="minDate"
+              :min="setDateBuilder"
               locale="tr"
               @change="changeCheckin"
               ></v-date-picker>
             </v-menu>
-              <label v-if="buttonStatus && this.$v.checkinDate.$invalid" for="" class="error-message">Lütfen Giriş Tarihini Seçiniz</label>
+              <label v-if="buttonStatus && this.$v.checkinDate.$invalid" class="error-message">Lütfen Giriş Tarihini Seçiniz</label>
           </v-col>
           
         </v-row>
@@ -49,8 +49,8 @@
           <v-col 
             cols="12"
             :class="{
-              'has-error': buttonStatus && this.$v.checkoutDate.$invalid,
-              'has-success': !this.$v.checkoutDate.$invalid,
+              'errorContainer': buttonStatus && this.$v.checkoutDate.$invalid,
+              'successContainer': !this.$v.checkoutDate.$invalid,
             }"
           >
             
@@ -78,7 +78,7 @@
                 ></v-date-picker>
 
               </v-menu>
-              <label v-if="buttonStatus && this.$v.checkoutDate.$invalid" for="" class="error-message">Lütfen Çıkış Tarihini Seçiniz</label>
+              <label v-if="buttonStatus && this.$v.checkoutDate.$invalid" class="error-message">Lütfen Çıkış Tarihini Seçiniz</label>
 
           </v-col>
           
@@ -145,7 +145,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'minDate' 
+      'setDateBuilder' 
     ])
   },
   created () {
@@ -171,21 +171,21 @@ export default {
     font-size: 12px;
     margin:0;
     padding:0;
-    position: relative;
+    position: relative; 
     top:-15px;
     font-weight: bold;
   }
      
+.v-stepper {
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)!important;
 
-
-
-
-
-.v-stepper__content {
-  padding: 0!important;
+  .v-stepper__content {
+    padding: 0!important;
+  }
 }
 
-  .v-application{
+
+.v-application{
 
     .v-application--wrap {
         background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
@@ -193,9 +193,10 @@ export default {
         .v-stepper__wrapper {
           padding: 28px;
         }
+
       }
     
-    .has-error{
+    .errorContainer{
       .v-label{
         color:@c-error !important;
         caret-color:@c-error !important;
@@ -207,7 +208,7 @@ export default {
         color:@c-error !important;
       }
     }
-    .has-success{
+    .successContainer{
       .v-label{
         color:@c-success !important;
         caret-color:@c-success !important;
@@ -217,4 +218,9 @@ export default {
       }
     }
   }
+
+.v-menu__content {
+        min-width: 0!important
+      }
+
 </style>

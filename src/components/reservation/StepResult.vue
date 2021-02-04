@@ -15,7 +15,7 @@
     >
       <v-list-item two-line>
         <v-list-item-content>
-          <v-list-item-title class="primary--text">Giriş / Çıkış Tarihleri</v-list-item-title>
+          <v-list-item-title class="primary--text mb-2">Giriş / Çıkış Tarihleri</v-list-item-title>
           <v-list-item-subtitle>
             <strong>{{getCheckinDate}} / {{getCheckoutDate}}</strong>
           </v-list-item-subtitle>
@@ -23,7 +23,7 @@
       </v-list-item>
       <v-list-item two-line>
         <v-list-item-content>
-          <v-list-item-title class="primary--text">Oda / Manzara Tipi</v-list-item-title>
+          <v-list-item-title class="primary--text mb-2">Oda / Manzara Tipi</v-list-item-title>
           <v-list-item-subtitle>
             <strong>{{getRoomType}} / {{getRoomView}}</strong>
           </v-list-item-subtitle>
@@ -31,7 +31,7 @@
       </v-list-item>
       <v-list-item two-line> 
         <v-list-item-content> 
-          <v-list-item-title class="primary--text">Ödeme Detayı</v-list-item-title>
+          <v-list-item-title class="primary--text mb-2">Ödeme Detayı</v-list-item-title>
           <v-list-item-subtitle>
             <strong>{{getCardDetails && getCardDetails.name | toUpperCase}}</strong>
             <br>
