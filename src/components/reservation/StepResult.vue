@@ -8,38 +8,70 @@
     >
       Sayın {{getCardDetails && getCardDetails.name | toUpperCase}}, rezervasyonunuz başarıyla oluşturulmuştur. {{getSelectCheckInDate}} tarihinde otelimize giriş yapabilirsiniz. Detaylar aşağıda yer almaktadır.
     </v-alert>
-    <v-card
-      class="mx-auto roomType pa-6"
-      max-width="100%"
-      tile
-    >
-      <v-list-item two-line>
-        <v-list-item-content>
-          <v-list-item-title class="primary--text mb-2">Giriş / Çıkış Tarihleri</v-list-item-title>
-          <v-list-item-subtitle>
-            <strong>{{getSelectCheckInDate}} / {{getSelectCheckOutDate}}</strong>
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-      <v-list-item two-line>
-        <v-list-item-content>
-          <v-list-item-title class="primary--text mb-2">Oda / Manzara Tipi</v-list-item-title>
-          <v-list-item-subtitle>
-            <strong>{{getSelectRoomType}} / {{getSelectRoomView}}</strong>
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-      <v-list-item two-line> 
-        <v-list-item-content> 
-          <v-list-item-title class="primary--text mb-2">Ödeme Detayı</v-list-item-title>
-          <v-list-item-subtitle>
-            <strong>{{getCardDetails && getCardDetails.name | toUpperCase}}</strong>
-            <br>
-            <strong>Kart Numarası: {{ getCardDetails.number }}</strong>
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-    </v-card>
+
+    <v-row>
+      <v-col cols="12" sm="12" lg="4" md="4">
+        <v-card
+          class="mx-auto section-bg pa-6"
+          max-width="100%"
+          tile
+        >
+
+          <v-list-item two-line>
+            <v-list-item-content>
+              <v-list-item-title class="headline primary--text mb-3">
+                Giriş / Çıkış Tarihleri
+              </v-list-item-title>
+              <v-list-item-subtitle>
+                <strong>{{getSelectCheckInDate}} / {{getSelectCheckOutDate}}</strong>
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" sm="12" lg="4" md="4">
+        <v-card
+          class="mx-auto section-bg pa-6"
+          max-width="100%"
+          tile
+        >
+
+          <v-list-item two-line>
+            <v-list-item-content>
+              <v-list-item-title class="headline primary--text mb-3">
+                Oda / Manzara Tipi
+              </v-list-item-title>
+              <v-list-item-subtitle>
+                <strong>{{getSelectRoomType}} / {{getSelectRoomView}}</strong>
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" sm="12" lg="4" md="4">
+        <v-card
+          class="mx-auto section-bg pa-6"
+          max-width="100%"
+          tile
+        >
+
+          <v-list-item two-line>
+            <v-list-item-content>
+              <v-list-item-title class="headline primary--text mb-3">
+                Ödeme Detayı
+              </v-list-item-title>
+              <v-list-item-subtitle>
+                <strong>{{getCardDetails && getCardDetails.name | toUpperCase}}</strong><br>
+                <strong>Kart Numarası: {{ getCardDetails.number }}</strong>
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
+      </v-col>
+    </v-row>
+    
     <app-button 
             class="float-right mt-8"
               @click.native="prevStep"
@@ -112,9 +144,8 @@ export default {
 </script>
 
 <style lang="less">
-  .v-list-item__content {
-    border-bottom: 1px dashed #cecece;
-    margin-bottom: 15px;
+  .v-card {
+    min-height: 150px;
   }
 
 </style>

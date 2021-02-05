@@ -7,7 +7,7 @@
           Çıkış Tarihi: <span class="font-weight-thin black--text">{{getSelectCheckOutDate}} </span>
           </h3> 
       </v-col>
-      <v-col class="ma-auto roomType mb-11 mt-5" cols="12" sm="12" lg="6">
+      <v-col class="ma-auto section-bg mb-11 mt-5" cols="12" sm="12" lg="6">
         <v-col class="mb-0 pb-0 bb" cols="12">
           <v-row>
             <v-col class="align-center" cols="12">
@@ -154,7 +154,7 @@ export default {
   } 
 }
 
-.roomType {
+.section-bg {
     box-shadow: 5px 10px 18px rgba(136, 136, 136, 1)!important;
     border-radius: 10px ;
 }

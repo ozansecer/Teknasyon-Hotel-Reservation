@@ -1,7 +1,7 @@
 <template>
   <section>
     <v-row>
-      <v-col class="mx-auto roomType mt-6 mb-11 pa-8" cols="12" sm="12" md="6" >
+      <v-col class="mx-auto section-bg mt-6 mb-11 pa-8" cols="12" sm="12" md="6" >
         <v-row>
           <v-col class="align-center" cols="12" sm="12" md="12">
             <h3 class="primary--text">Giriş Tarihi</h3>

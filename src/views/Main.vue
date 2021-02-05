@@ -1,12 +1,11 @@
 <template>
-  <div class="home">
     <v-stepper
     @change="changeStep"
     v-model="stepCurrentIndex"
     >
     <v-row>
        <v-col sm="12" md="8" class="mx-auto pa-7"> 
-        <v-stepper-header class="roomType">
+        <v-stepper-header class="section-bg">
           <v-stepper-step
           :editable="completedStep > 0"
           :complete="activeStep > 1"
@@ -57,7 +56,6 @@
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
-  </div>
 </template>
 
 <script>

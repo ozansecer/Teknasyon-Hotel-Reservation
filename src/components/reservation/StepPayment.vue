@@ -10,7 +10,7 @@
       <v-col class="text-center" cols="12" md="12">
         <h3 class="primary--text">Oda Tipi: <span class="font-weight-thin black--text">{{getSelectRoomType}} / {{getSelectRoomView}}</span></h3>
       </v-col>
-      <v-col class="mx-auto roomType pa-10 mb-11" cols="12" md="6">
+      <v-col class="mx-auto section-bg pa-10 mb-11" cols="12" md="6">
         <div :class="`mx-auto card mb-6 ${cardBack}`">
 
           <span class="card-number">
