@@ -4,19 +4,19 @@ const state = {
 }
 
 const mutations = {
-  setRoomType (state, payload) {
+  setSelectRoomType (state, payload) {
     state.roomType = payload
   },
-  setRoomView (state, payload) {
+  setSelectRoomView (state, payload) {
     state.roomView = payload
   }
 }
 
 const getters = {
-  getRoomType (state) {
+  getSelectRoomType (state) {
     return state.roomType
   },
-  getRoomView (state) {
+  getSelectRoomView (state) {
     return state.roomView
   }
 }

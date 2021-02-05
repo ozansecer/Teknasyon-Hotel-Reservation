@@ -4,7 +4,7 @@ const state = {
 }
 
 const mutations = {
-  setActiveStep (state, payload) {
+  setCurrentStep (state, payload) {
     state.activeStep = payload
   },
   setCompletedStep (state, payload) {
@@ -13,7 +13,7 @@ const mutations = {
 }
 
 const getters = {
-  getActiveStep (state) {
+  getCurrentStep (state) {
     return state.activeStep
   },
   getCompletedStep (state) {

@@ -2,7 +2,7 @@
   <div class="home">
     <v-stepper
     @change="changeStep"
-    v-model="stepIndex"
+    v-model="stepCurrentIndex"
     >
     <v-row>
        <v-col sm="12" md="8" class="mx-auto pa-7"> 
@@ -78,12 +78,12 @@ export default {
     },
     data () {
       return {
-        stepIndex: 1,
+        stepCurrentIndex: 1,
       }
     },
     computed: {
       activeStep () {
-        return this.$store.getters.getActiveStep
+        return this.$store.getters.getCurrentStep
       },
       completedStep () {
         return this.$store.getters.getCompletedStep
@@ -91,15 +91,15 @@ export default {
     },
     watch: {
       activeStep () {
-        this.stepIndex = this.activeStep
+        this.stepCurrentIndex = this.activeStep
       },
-      stepIndex () {
-        this.$store.commit("setActiveStep", Number(this.stepIndex))
+      stepCurrentIndex () {
+        this.$store.commit("setCurrentStep", Number(this.stepCurrentIndex))
       }
     },
     methods: {
      changeStep ()  {
-       this.$store.commit("setActiveStep", this.activeStep)
+       this.$store.commit("setCurrentStep", this.activeStep)
      }
     }
   }

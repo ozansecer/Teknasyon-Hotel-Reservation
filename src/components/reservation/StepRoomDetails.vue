@@ -2,16 +2,16 @@
   <section>
     <v-row>
       <v-col class="text-center mx-auto" cols="12" sm="12">
-        <h3 class="primary--text">Giriş Tarihi: <span class="font-weight-thin black--text">{{getCheckinDate}} </span>
+        <h3 class="primary--text">Giriş Tarihi: <span class="font-weight-thin black--text">{{getSelectCheckInDate}} </span>
           /
-          Çıkış Tarihi: <span class="font-weight-thin black--text">{{getCheckoutDate}} </span>
+          Çıkış Tarihi: <span class="font-weight-thin black--text">{{getSelectCheckOutDate}} </span>
           </h3> 
       </v-col>
       <v-col class="ma-auto roomType mb-11 mt-5" cols="12" sm="12" lg="6">
         <v-col class="mb-0 pb-0 bb" cols="12">
           <v-row>
             <v-col class="align-center" cols="12">
-              <h3 class="primary--text">Oda Tipi:</h3>
+              <h3 class="primary--text">Oda Tipi</h3>
             </v-col>
 
             <v-col cols="12">
@@ -20,21 +20,21 @@
                 :row="true"
                 v-model="roomType"
                 :class="{
-                  'errorContainer': buttonStatus && !this.$v.roomType.required
+                  'errorContainer': isButtonSituation && !this.$v.roomType.required
                   }"
               >
                 <v-radio value="Standart" label="Standart"></v-radio>
                 <v-radio value="Deluxe" label="Deluxe"></v-radio> 
                 <v-radio value="Suit" label="Suit"></v-radio>
               </v-radio-group>
-                <label v-if="buttonStatus && !this.$v.roomType.required" for="" class="error-message">Lütfen Oda Tipini Seçiniz</label>
+                <label v-if="isButtonSituation && !this.$v.roomType.required" for="" class="error-message">Lütfen Oda Tipini Seçiniz</label>
             </v-col>
           </v-row>
         </v-col>
         <v-col class="mt-0 pt-0" cols="12">
           <v-row>
             <v-col class="align-center mt-5" cols="12">
-            <h3 class="primary--text">Manzara Seçimi:</h3>
+            <h3 class="primary--text">Manzara Seçimi</h3>
             </v-col>
 
             <v-col cols="12">
@@ -43,13 +43,13 @@
                 :row="true"
                 v-model="roomView"
                 :class="{
-                  'ma-0 errorContainer': buttonStatus && !this.$v.roomView.required
+                  'ma-0 errorContainer': isButtonSituation && !this.$v.roomView.required
                   }"
               >
                 <v-radio value="Deniz" label="Deniz"></v-radio>
                 <v-radio value="Kara" label="Kara"></v-radio>
               </v-radio-group>
-                <label v-if="buttonStatus && !this.$v.roomView.required" for="" class="error-message">Lütfen Manzara Tipini Seçiniz</label>
+                <label v-if="isButtonSituation && !this.$v.roomView.required" for="" class="error-message">Lütfen Manzara Tipini Seçiniz</label>
             </v-col>
           </v-row>
         </v-col>
@@ -58,19 +58,19 @@
     <app-button 
     class="float-left"
       @click.native="prevStep"
-      :index="stepIndex-1"
+      :index="stepCurrentIndex-1"
     >
-    Geri
+    GERİ
     </app-button>
     <app-button
-    @click.native="nextStep"
-    :index="stepIndex"
+    @click.native="nextCurrentStep"
+    :index="stepCurrentIndex"
     ></app-button>
   </section>
 </template>
 <script>
 
-import button from '../buttons/button'
+import Button from '../buttons/Button'
 import { required } from 'vuelidate/lib/validators'
 
 import { mapGetters } from 'vuex'
@@ -78,14 +78,37 @@ import { mapGetters } from 'vuex'
 export default {
   name: "StepRoomDetails",
   components: {
-    appButton: button
+    appButton: Button
   },
   data () {
     return {
       roomType: null,
       roomView: null,
-      stepIndex: null,
-      buttonStatus: false
+      stepCurrentIndex: null,
+      isButtonSituation: false
+    }
+  },
+  methods: {
+    prevStep () {
+      this.$store.commit("setCurrentStep", 1)
+    },
+    nextCurrentStep () {
+      this.isButtonSituation = true
+      if(this.stepCurrentIndex === null && !this.$v.$invalid){
+        this.$store.commit("setCompletedStep", 3)
+      }
+      !this.$v.$invalid ? this.stepCurrentIndex = 3 : ""
+    }
+  },
+  watch: {
+    roomType () {
+      this.$store.commit("setSelectRoomType", this.roomType)
+    },
+    roomView () {
+      this.$store.commit("setSelectRoomView", this.roomView)
+    },
+    stepCurrentIndex () {
+      this.$store.commit("setCurrentStep", this.stepCurrentIndex)
     }
   },
   validations: {
@@ -96,32 +119,9 @@ export default {
       required
     }
   },
-  methods: {
-    prevStep () {
-      this.$store.commit("setActiveStep", 1)
-    },
-    nextStep () {
-      this.buttonStatus = true
-      if(this.stepIndex === null && !this.$v.$invalid){
-        this.$store.commit("setCompletedStep", 3)
-      }
-      !this.$v.$invalid ? this.stepIndex = 3 : ""
-    }
-  },
-  watch: {
-    roomType () {
-      this.$store.commit("setRoomType", this.roomType)
-    },
-    roomView () {
-      this.$store.commit("setRoomView", this.roomView)
-    },
-    stepIndex () {
-      this.$store.commit("setActiveStep", this.stepIndex)
-    }
-  },
   computed: {
     ...mapGetters([
-      'getCheckinDate', 'getCheckoutDate'
+      'getSelectCheckInDate', 'getSelectCheckOutDate'
     ])
   },
   created () {

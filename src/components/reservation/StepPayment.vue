@@ -2,32 +2,32 @@
   <section>
     <v-row>
       <v-col class="text-center" cols="12" md="12">
-        <h3 class="primary--text">Giriş Tarihi: <span class="font-weight-thin black--text">{{getCheckinDate}} </span>
+        <h3 class="primary--text">Giriş Tarihi: <span class="font-weight-thin black--text">{{getSelectCheckInDate}} </span>
           /
-          Çıkış Tarihi: <span class="font-weight-thin black--text">{{getCheckoutDate}} </span>
+          Çıkış Tarihi: <span class="font-weight-thin black--text">{{getSelectCheckOutDate}} </span>
           </h3> 
       </v-col>
       <v-col class="text-center" cols="12" md="12">
-        <h3 class="primary--text">Oda Tipi: <span class="font-weight-thin black--text">{{getRoomType}} / {{getRoomView}}</span></h3>
+        <h3 class="primary--text">Oda Tipi: <span class="font-weight-thin black--text">{{getSelectRoomType}} / {{getSelectRoomView}}</span></h3>
       </v-col>
       <v-col class="mx-auto roomType pa-10 mb-11" cols="12" md="6">
         <div :class="`mx-auto card mb-6 ${cardBack}`">
 
-          <span class="card__number">
+          <span class="card-number">
             {{!cardNumber ? placeNumber : cardNumber }}
           </span>
-          <span class="card__name">
+          <span class="card-name">
             {{!cardName && !cardName ? placeName : cardName | toUpperCase}}
           </span>
-          <span class="card__date">
+          <span class="card-date">
             {{!cardDate ? placeDate : cardDate }}
           </span>
-          <span class="card__cvc">
+          <span class="card-cvc">
             {{!cardCVC ? placeCVC : cardCVC }}
           </span>
           
-          <span class="card__logo"></span>
-          <span class="card__bg">
+          <span class="card-logo"></span>
+          <span class="card-bg">
           </span>
         </div>
 
@@ -40,12 +40,12 @@
               @focus="focusInput('cardName')"
               @blur="blurInput('cardName')"
               :class="{
-                'errorContainer': (buttonStatus && !this.$v.cardName.required) || (buttonStatus &&  !this.$v.cardName.minLength),
+                'errorContainer': (isButtonSituation && !this.$v.cardName.required) || (isButtonSituation &&  !this.$v.cardName.minLength),
                 'successContainer': !this.$v.cardName.$invalid,
                 }"
             ></v-text-field>
-            <label v-if="buttonStatus && !this.$v.cardName.required" for="" class="error-message">Lütfen isim ve soyisim giriniz</label>
-            <label v-if="buttonStatus &&  !this.$v.cardName.minLength" for="" class="error-message">Lütfen minimum 3 karakter giriniz</label>
+            <label v-if="isButtonSituation && !this.$v.cardName.required" for="" class="error-message">Lütfen isim ve soyisim giriniz</label>
+            <label v-if="isButtonSituation &&  !this.$v.cardName.minLength" for="" class="error-message">Lütfen minimum 3 karakter giriniz</label>
           </v-col>
           <v-col cols="12" md="6">
             <v-text-field
@@ -56,13 +56,13 @@
               @focus="focusInput('cardNumber')"
               @blur="blurInput('cardNumber')"
               :class="{
-                'errorContainer': (buttonStatus && !this.$v.cardNumber.required) || (buttonStatus &&  !this.$v.cardNumber.minLength),
+                'errorContainer': (isButtonSituation && !this.$v.cardNumber.required) || (isButtonSituation &&  !this.$v.cardNumber.minLength),
                 'successContainer': !this.$v.cardNumber.$invalid,
                 }"
             >
             </v-text-field>
-            <label v-if="buttonStatus && !this.$v.cardNumber.required" for="" class="error-message">Lütfen kart numaranızı giriniz</label>
-            <label v-if="buttonStatus &&  !this.$v.cardNumber.minLength" for="" class="error-message">Lütfen kart numaranızın tamamını giriniz</label>
+            <label v-if="isButtonSituation && !this.$v.cardNumber.required" for="" class="error-message">Lütfen kart numaranızı giriniz</label>
+            <label v-if="isButtonSituation &&  !this.$v.cardNumber.minLength" for="" class="error-message">Lütfen kart numaranızın tamamını giriniz</label>
           </v-col>
           <v-col cols="12" md="6">
             <v-text-field
@@ -73,12 +73,12 @@
               @focus="focusInput('cardDate')"
               @blur="blurInput('cardDate')"
               :class="{
-                'errorContainer': (buttonStatus && !this.$v.cardDate.required) || (buttonStatus &&  !this.$v.cardDate.minLength),
+                'errorContainer': (isButtonSituation && !this.$v.cardDate.required) || (isButtonSituation &&  !this.$v.cardDate.minLength),
                 'successContainer': !this.$v.cardDate.$invalid,
                 }"
             ></v-text-field>
-            <label v-if="buttonStatus && !this.$v.cardDate.required" for="" class="error-message">Lütfen kartınızın son kullanma tarihini giriniz</label>
-            <label v-if="buttonStatus &&  !this.$v.cardDate.minLength" for="" class="error-message">Lütfen kartınızın son kullanma tarihinin tamamını giriniz</label>
+            <label v-if="isButtonSituation && !this.$v.cardDate.required" for="" class="error-message">Lütfen kartınızın son kullanma tarihini giriniz</label>
+            <label v-if="isButtonSituation &&  !this.$v.cardDate.minLength" for="" class="error-message">Lütfen kartınızın son kullanma tarihinin tamamını giriniz</label>
           </v-col>
           <v-col cols="12" md="6">
             <v-text-field
@@ -89,12 +89,12 @@
               @focus="focusInput('cardCVC')"
               @blur="blurInput('cardCVC')"
               :class="{
-                'errorContainer': (buttonStatus && !this.$v.cardCVC.required) || (buttonStatus &&  !this.$v.cardCVC.minLength),
+                'errorContainer': (isButtonSituation && !this.$v.cardCVC.required) || (isButtonSituation &&  !this.$v.cardCVC.minLength),
                 'successContainer': !this.$v.cardCVC.$invalid,
                 }"
             ></v-text-field>
-            <label v-if="buttonStatus && !this.$v.cardCVC.required" for="" class="error-message">Lütfen kartınızın güvenlik numarasını giriniz</label>
-            <label v-if="buttonStatus &&  !this.$v.cardCVC.minLength" for="" class="error-message">Lütfen kartınızın güvenlik numarasının tamamını giriniz</label>
+            <label v-if="isButtonSituation && !this.$v.cardCVC.required" for="" class="error-message">Lütfen kartınızın güvenlik numarasını giriniz</label>
+            <label v-if="isButtonSituation &&  !this.$v.cardCVC.minLength" for="" class="error-message">Lütfen kartınızın güvenlik numarasının tamamını giriniz</label>
           </v-col>
         </v-row>
       </v-col>
@@ -102,21 +102,21 @@
     <app-button 
     class="float-left"
       @click.native="prevStep"
-      :index="stepIndex-1"
+      :index="stepCurrentIndex-1"
     >
-    Geri
+    GERİ
     </app-button>
     <app-button 
-      @click.native="nextStep"
-      :index="stepIndex"
+      @click.native="nextCurrentStep"
+      :index="stepCurrentIndex"
     >
-    Ödeme Yap
+    ÖDEME
     </app-button>
   </section>
 </template>
 <script>
 
-import button from '../buttons/button'
+import Button from '../buttons/Button'
 import { required, minLength  } from 'vuelidate/lib/validators'
 
 import { mapGetters } from 'vuex'
@@ -124,7 +124,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: "StepPayment",
   components: {
-    appButton: button
+    appButton: Button
   },
   data () {
     return {
@@ -139,8 +139,43 @@ export default {
       placeDate: '00/00',
       placeCVC: '000',
       
-      stepIndex: null,
-      buttonStatus: false
+      stepCurrentIndex: null,
+      isButtonSituation: false
+    }
+  },
+  methods: {
+    prevStep () {
+      this.$store.commit("setCurrentStep", 2)
+    },
+    nextCurrentStep () {
+      this.isButtonSituation = true
+      if(this.stepCurrentIndex === null && !this.$v.$invalid){
+        this.$store.commit("setCompletedStep", 4)
+      }
+      !this.$v.$invalid ? this.stepCurrentIndex = 4 : ""
+
+      const cardUserDetails = {
+        name: this.cardName,
+        number: this.cardNumber,
+        date: this.cardDate,
+        cvc: this.cardCVC
+      }
+      this.$store.commit("setCardDetails", cardUserDetails)
+    },
+    focusInput (type) {
+      if (type === "cardCVC") {
+        this.cardBack = true
+      }
+    },
+    blurInput (type) {
+      if (type === "cardCVC") {
+        this.cardBack = false
+      }
+    }
+  },
+  watch: {
+    stepCurrentIndex () {
+      this.$store.commit("setCurrentStep", this.stepCurrentIndex)
     }
   },
   validations: {
@@ -161,45 +196,10 @@ export default {
       minLength: minLength(3)
     }
   },
-  watch: {
-    stepIndex () {
-      this.$store.commit("setActiveStep", this.stepIndex)
-    }
-  },
   computed: {
     ...mapGetters([
-      'getCheckinDate', 'getCheckoutDate', 'getRoomType', 'getRoomView'
+      'getSelectCheckInDate', 'getSelectCheckOutDate', 'getSelectRoomType', 'getSelectRoomView'
     ])
-  },
-  methods: {
-    prevStep () {
-      this.$store.commit("setActiveStep", 2)
-    },
-    nextStep () {
-      this.buttonStatus = true
-      if(this.stepIndex === null && !this.$v.$invalid){
-        this.$store.commit("setCompletedStep", 4)
-      }
-      !this.$v.$invalid ? this.stepIndex = 4 : ""
-
-      const cardDetail = {
-        name: this.cardName,
-        number: this.cardNumber,
-        date: this.cardDate,
-        cvc: this.cardCVC
-      }
-      this.$store.commit("setCard", cardDetail)
-    },
-    focusInput (type) {
-      if (type === "cardCVC") {
-        this.cardBack = true
-      }
-    },
-    blurInput (type) {
-      if (type === "cardCVC") {
-        this.cardBack = false
-      }
-    }
   },
   created () {
     const paymentStorage = JSON.parse(localStorage.getItem("reservationObj"))
@@ -234,7 +234,7 @@ export default {
         height:200px;
       }
 
-    .card__cvc{
+    .card-cvc{
       opacity: 0;
       z-index: 2;
       width: 100%;
@@ -256,22 +256,22 @@ export default {
   }
   .true{
     transform:rotateY(180deg);
-    .card__number,
-    .card__name,
-    .card__date{
+    .card-number,
+    .card-name,
+    .card-date{
       opacity: 0;
     }
-    .card__logo{
+    .card-logo{
       transform:rotateY(180deg);
     }
-    .card__cvc{
+    .card-cvc{
       opacity: 1;
       display: inline-block;
       position: static;
     }
   }
 
-  .card__number{
+  .card-number{
     z-index: 2;
     width:100%;
     text-align: center;
@@ -287,8 +287,8 @@ export default {
         font-size: 20px;
     }
   }
-  .card__name,
-  .card__date{
+  .card-name,
+  .card-date{
     z-index: 2;
     padding:0 20px 20px 20px;
     color:#fff;
@@ -298,8 +298,8 @@ export default {
         font-size: 12px;
     }
   }
-  .card__bg,
-  .card__logo{
+  .card-bg,
+  .card-logo{
     position: absolute;
     width:100%;
     height: 100%;
@@ -308,7 +308,7 @@ export default {
     background: linear-gradient(to top, #4481eb 0%, #04befe 100%);
     box-shadow: 5px 5px 5px #888884;
   }
-  .card__logo{
+  .card-logo{
     background-image:url('../../assets/master-card.png');
     background-repeat: no-repeat;
     background-position: top 15px left 20px;

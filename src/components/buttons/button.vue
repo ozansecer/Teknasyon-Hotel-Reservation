@@ -1,8 +1,8 @@
 <template>
   <div>
       <v-btn
-        color="success"
-        class="float-right"
+        color="#00ACC1"
+        class="float-right white--text"
         @click="setStep(index)"
       >
       <slot>
@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     setStep (index) {
-      index ? this.$store.commit("setActiveStep", Number(index)) : "" 
+      index ? this.$store.commit("setCurrentStep", Number(index)) : "" 
     }
   }
 }

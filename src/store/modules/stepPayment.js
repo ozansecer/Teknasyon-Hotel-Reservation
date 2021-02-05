@@ -1,5 +1,5 @@
 const state = {
-  cardDetail: {
+  cardUserDetails: {
     name: "",
     number: null,
     date: null,
@@ -8,14 +8,14 @@ const state = {
 }
 
 const mutations = {
-  setCard (state, payload) {
-    return state.cardDetail = payload
+  setCardDetails (state, payload) {
+    return state.cardUserDetails = payload
   }
 }
 
 const getters = {
   getCardDetails (state) {
-    return state.cardDetail
+    return state.cardUserDetails
   }
 }
 

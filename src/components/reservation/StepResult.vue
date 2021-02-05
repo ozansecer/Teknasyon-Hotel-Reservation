@@ -6,7 +6,7 @@
       icon="fas fa-check-circle"
       text
     >
-      Sayın {{getCardDetails && getCardDetails.name | toUpperCase}}, rezervasyonunuz başarıyla oluşturulmuştur. {{getCheckinDate}} tarihinde otelimize giriş yapabilirsiniz. Detaylar aşağıda yer almaktadır.
+      Sayın {{getCardDetails && getCardDetails.name | toUpperCase}}, rezervasyonunuz başarıyla oluşturulmuştur. {{getSelectCheckInDate}} tarihinde otelimize giriş yapabilirsiniz. Detaylar aşağıda yer almaktadır.
     </v-alert>
     <v-card
       class="mx-auto roomType pa-6"
@@ -17,7 +17,7 @@
         <v-list-item-content>
           <v-list-item-title class="primary--text mb-2">Giriş / Çıkış Tarihleri</v-list-item-title>
           <v-list-item-subtitle>
-            <strong>{{getCheckinDate}} / {{getCheckoutDate}}</strong>
+            <strong>{{getSelectCheckInDate}} / {{getSelectCheckOutDate}}</strong>
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -25,7 +25,7 @@
         <v-list-item-content>
           <v-list-item-title class="primary--text mb-2">Oda / Manzara Tipi</v-list-item-title>
           <v-list-item-subtitle>
-            <strong>{{getRoomType}} / {{getRoomView}}</strong>
+            <strong>{{getSelectRoomType}} / {{getSelectRoomView}}</strong>
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -43,49 +43,49 @@
     <app-button 
             class="float-right mt-8"
               @click.native="prevStep"
-              :index="stepIndex-1"
+              :index="stepCurrentIndex-1"
           >
-            Başa Dön
+            BAŞA DÖN
       </app-button>
   </section>
 </template>
 <script>
 
-import button from '../buttons/button'
+import Button from '../buttons/Button'
 
 import { mapGetters } from 'vuex'
 
 export default {
   name: "StepResult",
   components: {
-    appButton: button
+    appButton: Button
   },
   data() {
     return{
-      stepIndex: null,
+      stepCurrentIndex: null,
     }
   },
   methods: {
     prevStep () {
-      this.$store.commit("setActiveStep", 1)
+      this.$store.commit("setCurrentStep", 1)
     },
   },
   computed: {
     ...mapGetters([
-      'getCheckinDate', 'getCheckoutDate', 'getRoomType', 'getRoomView', 'getCardDetails', 'getActiveStep'
+      'getSelectCheckInDate', 'getSelectCheckOutDate', 'getSelectRoomType', 'getSelectRoomView', 'getCardDetails', 'getCurrentStep'
     ])
   },
   watch: {
-    getActiveStep () {
-      if(this.getActiveStep === 4){
+    getCurrentStep () {
+      if(this.getCurrentStep === 4){
         const resultObj = {
           date: {
-            checkin: this.getCheckinDate,
-            checkout: this.getCheckoutDate,
+            checkin: this.getSelectCheckInDate,
+            checkout: this.getSelectCheckOutDate,
           },
           room: {
-            type: this.getRoomType,
-            view: this.getRoomView
+            type: this.getSelectRoomType,
+            view: this.getSelectRoomView
           },
           card: this.getCardDetails
         }

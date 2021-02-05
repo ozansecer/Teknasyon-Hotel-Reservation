@@ -4,13 +4,13 @@
       <v-col class="mx-auto roomType mt-6 mb-11 pa-8" cols="12" sm="12" md="6" >
         <v-row>
           <v-col class="align-center" cols="12" sm="12" md="12">
-            <h3 class="primary--text">Giriş Tarihi</h3>:
+            <h3 class="primary--text">Giriş Tarihi</h3>
           </v-col>
           <v-col
             cols="12" sm="12" md="12"
             :class="{
-              'errorContainer': buttonStatus && this.$v.checkinDate.$invalid,
-              'successContainer': !this.$v.checkinDate.$invalid,
+              'errorContainer': isButtonSituation && this.$v.selectCheckInDate.$invalid,
+              'successContainer': !this.$v.selectCheckInDate.$invalid,
             }"
           >
             <v-menu
@@ -19,7 +19,7 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                  v-model="checkinDate"
+                  v-model="selectCheckInDate"
                   label="Giriş Tarihini Seçiniz"
                   prepend-icon="fas fa-calendar-week"
                   v-bind="attrs"
@@ -32,25 +32,25 @@
               year-icon="mdi-calendar-blank"
               prev-icon="mdi-skip-previous"
               next-icon="mdi-skip-next"
-              v-model="checkinDate"
+              v-model="selectCheckInDate"
               :min="setDateBuilder"
               locale="tr"
-              @change="changeCheckin"
+              @change="changeCheckInDate"
               ></v-date-picker>
             </v-menu>
-              <label v-if="buttonStatus && this.$v.checkinDate.$invalid" class="error-message">Lütfen Giriş Tarihini Seçiniz</label>
+              <label v-if="isButtonSituation && this.$v.selectCheckInDate.$invalid" class="error-message">Lütfen Giriş Tarihini Seçiniz</label>
           </v-col>
           
         </v-row>
         <v-row>
           <v-col class="align-center" cols="12">
-            <h3 class="primary--text">Çıkış Tarihi</h3>:
+            <h3 class="primary--text">Çıkış Tarihi</h3>
           </v-col>
           <v-col 
             cols="12"
             :class="{
-              'errorContainer': buttonStatus && this.$v.checkoutDate.$invalid,
-              'successContainer': !this.$v.checkoutDate.$invalid,
+              'errorContainer': isButtonSituation && this.$v.selectCheckOutDate.$invalid,
+              'successContainer': !this.$v.selectCheckOutDate.$invalid,
             }"
           >
             
@@ -61,39 +61,36 @@
 
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
-                    v-model="checkoutDate"
+                    v-model="selectCheckOutDate"
                     label="Çıkış Tarihini Seçiniz"
                     prepend-icon="fas fa-calendar-week"
                     v-bind="attrs"
                     v-on="on"
                     readonly
-                    :disabled="!checkinDate"
+                    :disabled="!selectCheckInDate"
                   ></v-text-field>
                 </template>
 
                 <v-date-picker
-                v-model="checkoutDate"
-                :min="checkinDate"
+                v-model="selectCheckOutDate"
+                :min="selectCheckInDate"
                 locale="tr"
                 ></v-date-picker>
 
               </v-menu>
-              <label v-if="buttonStatus && this.$v.checkoutDate.$invalid" class="error-message">Lütfen Çıkış Tarihini Seçiniz</label>
+              <label v-if="isButtonSituation && this.$v.selectCheckOutDate.$invalid" class="error-message">Lütfen Çıkış Tarihini Seçiniz</label>
 
           </v-col>
           
         </v-row>
       </v-col>
     </v-row>
-    <app-button
-    @click.native="nextStep"
-    :index="stepIndex"
-    ></app-button>
+    <Button @click.native="nextCurrentStep" :index="stepCurrentIndex" />
   </section>
 </template>
 <script>
 
-import button from '../buttons/button'
+import Button from '../buttons/Button'
 import { required } from 'vuelidate/lib/validators'
 
 import { mapGetters } from 'vuex'
@@ -101,46 +98,46 @@ import { mapGetters } from 'vuex'
 export default {
   name: "StepCheckIn",
   components: {
-    appButton: button
-  },
-  validations: {
-    checkinDate: {
-      required
-    },
-    checkoutDate: {
-      required
-    }
+    Button
   },
   data () {
     return {
-      checkinDate: null,
-      checkoutDate: null,
-      stepIndex: null,
-      buttonStatus: false,
+      selectCheckInDate: null,
+      selectCheckOutDate: null,
+      stepCurrentIndex: null,
+      isButtonSituation: false,
       count: 0
     }
   },
   methods: {
-    nextStep () {
-      this.buttonStatus = true
-      if(this.stepIndex === null && !this.$v.$invalid){
+    nextCurrentStep () {
+      this.isButtonSituation = true
+      if(this.stepCurrentIndex === null && !this.$v.$invalid){
         this.$store.commit("setCompletedStep", 2)
       }
-      !this.$v.$invalid ? this.stepIndex = 2 : ""
+      !this.$v.$invalid ? this.stepCurrentIndex = 2 : ""
     },
-    changeCheckin () {
-      this.checkoutDate = this.checkinDate
+    changeCheckInDate () {
+      this.selectCheckOutDate = this.selectCheckInDate
     }
   },
   watch: {
-    checkinDate () {
-      this.$store.commit("setCheckinDate", this.checkinDate)
+    selectCheckInDate () {
+      this.$store.commit("setSelectCheckInDate", this.selectCheckInDate)
     },
-    checkoutDate () {
-      this.$store.commit("setCheckoutDate", this.checkoutDate)
+    selectCheckOutDate () {
+      this.$store.commit("setSelectCheckOutDate", this.selectCheckOutDate)
     },
-    stepIndex () {
-      this.$store.commit("setActiveStep", this.stepIndex)
+    stepCurrentIndex () {
+      this.$store.commit("setCurrentStep", this.stepCurrentIndex)
+    }
+  },
+  validations: {
+    selectCheckInDate: {
+      required
+    },
+    selectCheckOutDate: {
+      required
     }
   },
   computed: {
@@ -151,8 +148,8 @@ export default {
   created () {
     const checkInStorage = JSON.parse(localStorage.getItem("reservationObj"))
     if(checkInStorage != null){
-      this.checkinDate = checkInStorage.date.checkin
-      this.checkoutDate = checkInStorage.date.checkout
+      this.selectCheckInDate = checkInStorage.date.checkin
+      this.selectCheckOutDate = checkInStorage.date.checkout
     }    
   }
 }
