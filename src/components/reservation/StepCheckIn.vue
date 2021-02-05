@@ -25,7 +25,7 @@
                   v-bind="attrs"
                   v-on="on"
                   readonly
-                ></v-text-field>
+                ></v-text-field> 
               </template>
 
               <v-date-picker
@@ -90,7 +90,7 @@
 </template>
 <script>
 
-import Button from '../buttons/Button'
+import Button from '../buttons/button'
 import { required } from 'vuelidate/lib/validators'
 
 import { mapGetters } from 'vuex'

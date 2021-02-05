@@ -51,7 +51,7 @@
 </template>
 <script>
 
-import Button from '../buttons/Button'
+import Button from '../buttons/button'
 
 import { mapGetters } from 'vuex'
 

@@ -70,7 +70,7 @@
 </template>
 <script>
 
-import Button from '../buttons/Button'
+import Button from '../buttons/button'
 import { required } from 'vuelidate/lib/validators'
 
 import { mapGetters } from 'vuex'
